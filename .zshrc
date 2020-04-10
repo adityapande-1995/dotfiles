@@ -14,7 +14,7 @@ POWERLEVEL9K_DIR_DEFAULT_BACKGROUND='123'
 
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 POWERLEVEL9K_MODE="awesome-fontconfig"
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon dir vcs custom_dirsize)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon dir vcs)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status ram battery)
 
 POWERLEVEL9K_CUSTOM_DIRSIZE="f_size"
@@ -118,7 +118,8 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias mux="tmux new-session \; split-window -p 66 \; split-window -d \; split-window -h"
+alias updy="sudo apt-get update; sudo apt-get -y upgrade"
 
-# ROS Env
 source /opt/ros/melodic/setup.zsh
 source /home/aditya/catkin_ws/devel/setup.zsh
