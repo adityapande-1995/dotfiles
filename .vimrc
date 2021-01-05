@@ -59,6 +59,10 @@ imap jj <Esc>
 set wildchar=<Tab> wildmenu wildmode=full
 set wildcharm=<C-Z>
 nnoremap <F10> :b <C-Z>
+" move among buffers with CTRL
+map <C-J> :bnext<CR>
+map <C-K> :bprev<CR>
+
 
 " Autoclose brackets
 inoremap " ""<left>
