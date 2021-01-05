@@ -68,7 +68,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -98,6 +98,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# FZF config
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_OPTS="
 --layout=reverse
@@ -114,5 +115,28 @@ export FZF_DEFAULT_OPTS="
 --bind 'ctrl-e:execute(echo {+} | xargs -o vim)'
 --bind 'ctrl-v:execute(code {+})'
 "
+
+# Map ranger to CTRL+f
+run_ranger () {
+    echo
+    ranger --choosedir=$HOME/.rangerdir < $TTY
+    LASTDIR=`cat $HOME/.rangerdir`
+    cd "$LASTDIR"
+    zle reset-prompt
+}
+zle -N run_ranger
+bindkey '^f' run_ranger
+
+# Aliases
 alias mux="tmux new-session \; split-window -p 66 \; split-window -d \; split-window -h"
 alias updy="sudo apt-get update; sudo apt-get -y upgrade"
+
+# ROS stuff
+source /opt/ros/melodic/setup.zsh
+source /opt/carla-ros-bridge/melodic/setup.zsh
+
+# NVIM IDE setup -- binaries from official releases used
+export TMPDIR="/tmp"
+export PATH=/home/aditya/editor/node-v15.5.1-linux-x64/bin/:$PATH
+export PATH=/home/aditya/editor/clangd_11.0.0/bin:$PATH
+alias nvim=/home/aditya/editor/nvim.appimage
