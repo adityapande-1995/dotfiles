@@ -24,6 +24,9 @@ if has('nvim')
 
 	" coc vim config from its github page"
 	source ~/coc-vim-config
+	" Tagbar shortcut
+	nmap <F8> :TagbarToggle<CR>
+	
 
 endif
 
@@ -55,6 +58,10 @@ set foldlevel=99
 " Remap esc
 imap jj <Esc>
 
+" Use Ctrl s to save
+:nmap <c-s> :w<CR>
+:imap <c-s> <Esc>:w<CR>a
+
 " Cycle buffers
 set wildchar=<Tab> wildmenu wildmode=full
 set wildcharm=<C-Z>
@@ -62,7 +69,6 @@ nnoremap <F10> :b <C-Z>
 " move among buffers with CTRL
 map <C-J> :bnext<CR>
 map <C-K> :bprev<CR>
-
 
 " Autoclose brackets
 inoremap " ""<left>
