@@ -24,10 +24,10 @@ if has('nvim')
 
 	" coc vim config from its github page"
 	source ~/coc-vim-config
-	" Tagbar shortcut
+	" Tagbar and NERDTree shortcut key
 	nmap <F8> :TagbarToggle<CR>
+	nmap <F7> :NERDTreeToggle<CR>
 	
-
 endif
 
 " ******** General settings, without any plugins *****
@@ -37,6 +37,7 @@ set termguicolors
 set number
 set mouse=a
 set ignorecase
+set splitbelow splitright
 
 " Fuzzy search without fzf
 set path+=**
@@ -79,3 +80,25 @@ inoremap { {}<left>
 inoremap {<CR> {<CR>}<ESC>O
 inoremap {;<CR> {<CR>};<ESC>O
 
+" Bulk comment functions -- custom
+function! Comment()
+  let ext = tolower(expand('%:e'))
+  if ext == 'php' || ext == 'rb' || ext == 'sh' || ext == 'py'
+    :norm I# 
+  elseif ext == 'js' || ext == 'c' || ext == 'cpp' || ext == 'h' || ext == 'hpp'
+    :norm I// 
+  endif
+endfunction
+
+function! Uncomment()
+  let ext = tolower(expand('%:e'))
+  if ext == 'php' || ext == 'rb' || ext == 'sh' || ext == 'py'
+    :norm ^xx
+  elseif ext == 'js'|| ext == 'c' || ext == 'cpp' || ext == 'h' || ext == 'hpp'
+    :norm ^xxx
+  endif
+endfunction
+
+" Comment uncomment triggers
+vnoremap <C-a> :call Comment()<CR>
+vnoremap <C-b> :call Uncomment()<CR>
