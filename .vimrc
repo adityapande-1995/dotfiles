@@ -1,3 +1,12 @@
+"                                   
+"          "                        
+" m   m  mmm    mmmmm   m mm   mmm  
+" "m m"    #    # # #   #"  " #"  " 
+"  #m#     #    # # #   #     #     
+"   #    mm#mm  # # #   #     "#mm" 
+"                                   
+"
+
 " *******************  Plugins and their settings  **********
 if has('nvim')
 	call plug#begin()
@@ -25,8 +34,8 @@ if has('nvim')
 	" coc vim config from its github page"
 	source ~/coc-vim-config
 	" Tagbar and NERDTree shortcut key
-	nmap <F8> :TagbarToggle<CR>
-	nmap <F7> :NERDTreeToggle<CR>
+	nmap <F7> :TagbarToggle<CR>
+	nmap <F8> :NERDTreeToggle<CR>
 	
 endif
 
@@ -58,6 +67,9 @@ set foldlevel=99
 
 " Remap esc
 imap jj <Esc>
+
+" Spellcheck
+:map <F6> :setlocal spell! spelllang=en_us<CR>
 
 " Use Ctrl s to save
 :nmap <c-s> :w<CR>
@@ -102,3 +114,5 @@ endfunction
 " Comment uncomment triggers
 vnoremap <C-a> :call Comment()<CR>
 vnoremap <C-b> :call Uncomment()<CR>
+
+
