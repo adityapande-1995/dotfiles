@@ -1,3 +1,16 @@
+## 
+##  ______________________
+## / ░▀▀█░█▀▀░█░█░█▀▄░█▀▀ \
+## | ░▄▀░░▀▀█░█▀█░█▀▄░█░░ |
+## \ ░▀▀▀░▀▀▀░▀░▀░▀░▀░▀▀▀ /
+##  ----------------------
+##         \   ^__^
+##          \  (oo)\_______
+##             (__)\       )\/\
+##                 ||----w |
+##                 ||     ||
+## 
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -130,6 +143,10 @@ bindkey '^f' run_ranger
 # Aliases
 alias mux="tmux new-session \; split-window -p 66 \; split-window -d \; split-window -h"
 alias updy="sudo apt-get update; sudo apt-get -y upgrade"
+alias o="xdg-open"
+alias zz="vim ~/.zshrc"
+alias vv="vim ~/.vimrc"
+alias ee="vim ~/.emacs.d/init.el"
 
 # ROS stuff
 source /opt/ros/melodic/setup.zsh
