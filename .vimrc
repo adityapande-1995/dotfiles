@@ -11,6 +11,9 @@
 "                 ||     ||
 " 
 
+" *** TODO ***
+" vim-which-key , leader key mapping
+
 " *******************  Plugins and their settings  **********
 if has('nvim')
 	call plug#begin()
@@ -22,28 +25,39 @@ if has('nvim')
 	Plug 'crusoexia/vim-monokai'
 	Plug 'dracula/vim', { 'as': 'dracula' }
 
-	Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-	Plug 'junegunn/fzf.vim'
+	""Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+	""Plug 'junegunn/fzf.vim'
 	Plug 'mhinz/vim-startify'
 	Plug 'preservim/tagbar'
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
+	Plug 'ryanoasis/vim-devicons'
+	Plug 'kien/ctrlp.vim'
+	" Dealing with tables
+	Plug 'godlygeek/tabular'
+	Plug 'dhruvasagar/vim-table-mode'
+	Plug 'vim-scripts/sherlock.vim'
+	Plug 'tpope/vim-fugitive'
 	call plug#end()
 
 	let g:airline_theme = 'luna'
 	let g:airline_powerline_fonts = 1
+	let g:airline#extensions#branch#enabled=1
 	let g:airline#extensions#tabline#enabled = 1
 
 	colorscheme dracula
 
 	" coc vim config from its github page"
 	source ~/coc-vim-config
-	" Tagbar and NERDTree shortcut key
+
+	" Key bindings for plugins
+	nmap <F6> :TableModeToggle<CR>
 	nmap <F7> :TagbarToggle<CR>
 	nmap <F8> :NERDTreeToggle<CR>
 	
 endif
 
 " ******** General settings, without any plugins *****
+set showcmd
 set t_Co=256
 syntax on
 set termguicolors
