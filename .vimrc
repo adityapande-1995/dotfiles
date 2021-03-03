@@ -33,10 +33,12 @@ if has('nvim')
 	Plug 'ryanoasis/vim-devicons'
 	Plug 'kien/ctrlp.vim'
 	" Dealing with tables
-	Plug 'godlygeek/tabular'
+	"Plug 'godlygeek/tabular'
+	Plug 'junegunn/vim-easy-align'
 	Plug 'dhruvasagar/vim-table-mode'
 	Plug 'vim-scripts/sherlock.vim'
 	Plug 'tpope/vim-fugitive'
+	Plug 'chrisbra/csv.vim'
 	call plug#end()
 
 	let g:airline_theme = 'luna'
