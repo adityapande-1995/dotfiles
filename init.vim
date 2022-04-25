@@ -44,6 +44,9 @@ Plug 'glepnir/dashboard-nvim'
 Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)
 Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
 
+Plug 'francoiscabrol/ranger.vim'
+Plug 'rbgrouleff/bclose.vim'
+
 call plug#end()
 
 " Run :PlugInstall to install these plugins
@@ -106,6 +109,26 @@ let g:dashboard_custom_shortcut={
 " Display tabs and spaces
 set list
 set listchars=tab:▸·,trail:~,extends:>,precedes:<,space:-
+
+" In your init.lua or init.vim
+set termguicolors
+lua << EOF
+require("bufferline").setup{}
+EOF
+
+" These commands will navigate through buffers in order regardless of which mode you are using
+" e.g. if you change the order of buffers :bnext and :bprevious will not respect the custom ordering
+nnoremap <silent>[b :BufferLineCycleNext<CR>
+nnoremap <silent>b] :BufferLineCyclePrev<CR>
+
+" These commands will move the current buffer backwards or forwards in the bufferline
+nnoremap <silent><mymap> :BufferLineMoveNext<CR>
+nnoremap <silent><mymap> :BufferLineMovePrev<CR>
+
+" These commands will sort buffers by directory, language, or a custom criteria
+nnoremap <silent>be :BufferLineSortByExtension<CR>
+nnoremap <silent>bd :BufferLineSortByDirectory<CR>
+nnoremap <silent><mymap> :lua require'bufferline'.sort_buffers_by(function (buf_a, buf_b) return buf_a.id < buf_b.id end)<CR>
 
 
 " NOTES
