@@ -22,6 +22,7 @@ set encoding=utf-8
 :set softtabstop=4
 :set mouse=a
 :set clipboard+=unnamedplus
+:set expandtab
 
 call plug#begin()
 
@@ -40,12 +41,14 @@ Plug 'https://github.com/tpope/vim-sleuth' " Automatically figures out whether t
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'glepnir/dashboard-nvim'
+Plug 'tpope/vim-fugitive'
 
 Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)
 Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
 
 Plug 'francoiscabrol/ranger.vim'
 Plug 'rbgrouleff/bclose.vim'
+Plug 'folke/which-key.nvim'
 
 call plug#end()
 
@@ -55,8 +58,6 @@ call plug#end()
 " ---------
 let g:mapleader="\<Space>"
 
-nnoremap <F7> :NERDTreeToggle<CR>
-nmap <F8> :TagbarToggle<CR>
 
 nnoremap <C-l> :call CocActionAsync('jumpDefinition')<CR>
 
@@ -69,13 +70,21 @@ nmap <Leader>sl :<C-u>SessionLoad<CR>
 nnoremap <silent> <Leader>fh :DashboardFindHistory<CR>
 nnoremap <silent> <Leader>ff :DashboardFindFile<CR>
 nnoremap <silent> <Leader>tc :DashboardChangeColorscheme<CR>
-nnoremap <silent> <Leader>fa :DashboardFindWord<CR>
+nnoremap <silent> <Leader>fw :DashboardFindWord<CR>
 nnoremap <silent> <Leader>fb :DashboardJumpMark<CR>
-nnoremap <silent> <Leader>cn :DashboardNewFile<CR>
+nnoremap <silent> <Leader>nf :DashboardNewFile<CR>
+nnoremap <silent> <Leader>fd :Dashboard<CR>
 
 " Open the vimrc file using SPACE: f e d
 let g:vimrc_path = expand('<sfile>')
-:nnoremap <Leader>fed :exec "e ".g:vimrc_path<cr>
+:nnoremap <Leader>fc :exec "e ".g:vimrc_path<cr>
+
+nnoremap <silent> <Leader>tn :NERDTreeToggle<CR>
+nnoremap <silent> <Leader>tt :TagbarToggle<CR>
+
+
+" Leader mappings
+:nnoremap <Leader><Leader> :Maps<cr>
 
 " Settings
 " --------
@@ -98,11 +107,12 @@ let g:dashboard_custom_shortcut={
 \ 'last_session'       : 'SPC s l',
 \ 'find_history'       : 'SPC f h',
 \ 'find_file'          : 'SPC f f',
-\ 'new_file'           : 'SPC c n',
+\ 'new_file'           : 'SPC n f',
 \ 'change_colorscheme' : 'SPC t c',
-\ 'find_word'          : 'SPC f a',
+\ 'find_word'          : 'SPC f w',
 \ 'book_marks'         : 'SPC f b',
-\ 'Open init.vim'      : 'SPC f e d',
+\ 'Open vim config'    : 'SPC f c',
+\ 'Ranger'             : 'SPC f',
 \ }
 
 
@@ -131,6 +141,12 @@ nnoremap <silent>bd :BufferLineSortByDirectory<CR>
 nnoremap <silent><mymap> :lua require'bufferline'.sort_buffers_by(function (buf_a, buf_b) return buf_a.id < buf_b.id end)<CR>
 
 
+lua << EOF
+  require("which-key").setup {
+  }
+EOF
+
+" ==============================================================================
 " NOTES
 " -----
 " :map-- to show all mappings
@@ -144,3 +160,6 @@ nnoremap <silent><mymap> :lua require'bufferline'.sort_buffers_by(function (buf_
 " :CocInstall coc-python
 " :CocInstall coc-clangd
 " :CocCommand clangd.install
+
+" Folding
+" :setlocal foldmethod=syntax
