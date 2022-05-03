@@ -1,16 +1,3 @@
-## 
-##  ______________________
-## / ░▀▀█░█▀▀░█░█░█▀▄░█▀▀ \
-## | ░▄▀░░▀▀█░█▀█░█▀▄░█░░ |
-## \ ░▀▀▀░▀▀▀░▀░▀░▀░▀░▀▀▀ /
-##  ----------------------
-##         \   ^__^
-##          \  (oo)\_______
-##             (__)\       )\/\
-##                 ||----w |
-##                 ||     ||
-## 
-
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -36,14 +23,13 @@ ZSH_THEME="robbyrussell"
 # Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
 
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to automatically update without prompting.
-# DISABLE_UPDATE_PROMPT="true"
+# Uncomment one of the following lines to change the auto-update behavior
+# zstyle ':omz:update' mode disabled  # disable automatic updates
+# zstyle ':omz:update' mode auto      # update automatically without asking
+# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
 # Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+# zstyle ':omz:update' frequency 13
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS="true"
@@ -58,6 +44,9 @@ ZSH_THEME="robbyrussell"
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
+# You can also set it to another string to have that shown instead of the default red dots.
+# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
+# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
 # COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
@@ -111,24 +100,6 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# FZF config
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_OPTS="
---layout=reverse
---info=inline
---height=80%
---multi
---preview-window=:hidden
---preview '([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200'
---color='hl:148,hl+:154,pointer:032,marker:010,bg+:237,gutter:008'
---prompt='∼ ' --pointer='▶' --marker='✓'
---bind '?:toggle-preview'
---bind 'ctrl-a:select-all'
---bind 'ctrl-y:execute-silent(echo {+} | pbcopy)'
---bind 'ctrl-e:execute(echo {+} | xargs -o vim)'
---bind 'ctrl-v:execute(code {+})'
-"
-
 # Map ranger to CTRL+f
 run_ranger () {
     echo
@@ -140,20 +111,53 @@ run_ranger () {
 zle -N run_ranger
 bindkey '^f' run_ranger
 
-# Aliases
-alias mux="tmux new-session \; split-window -p 66 \; split-window -d \; split-window -h"
-alias updy="sudo apt-get update; sudo apt-get -y upgrade"
-alias o="xdg-open"
-alias zz="vim ~/.zshrc"
-alias vv="vim ~/.vimrc"
-alias ee="vim ~/.emacs.d/init.el"
+alias zz='vim ~/.zshrc'
+alias sz='source ~/.zshrc'
 
-# ROS stuff
-source /opt/ros/melodic/setup.zsh
-source /opt/carla-ros-bridge/melodic/setup.zsh
+alias nvim='/home/aditya/nvim.appimage'
 
-# NVIM IDE setup -- binaries from official releases used
-export TMPDIR="/tmp"
-export PATH=/home/aditya/editor/node-v15.5.1-linux-x64/bin/:$PATH
-export PATH=/home/aditya/editor/clangd_11.0.0/bin:$PATH
-alias nvim=/home/aditya/editor/nvim.appimage
+# ROS workspace
+alias sr='source ~/ros2_rolling/install/local_setup.zsh'
+alias sw='source ~/dev_ws/install/setup.zsh'
+
+# Ignition workspace
+sif () {
+  echo "Sourcing ignition fortress installation"
+  alias sif='source ~/ignf_workspace/install/setup.zsh'
+}
+
+# Gazebo
+sg () {
+  echo "Sourcing gazebo11 installation"
+  export LD_LIBRARY_PATH=/home/aditya/local/lib:$LD_LIBRARY_PATH
+  export PATH=/home/aditya/local/bin:$PATH
+  export PKG_CONFIG_PATH=/home/aditya/local/lib/pkgconfig:$PKG_CONFIG_PATH
+}
+
+# Release credentials
+export DEBEMAIL="aditya.pande@openrobotics.org"
+export DEBFULLNAME="Aditya Pande"
+
+# FZF
+# Ctrl r -- history
+# Ctrl t -- file search
+# Alt c -- quick cd
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+alias fp="fzf --preview 'less {}' --height 40%"
+
+git-commit-show () 
+{
+  git log --graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"  | \
+   fzf --ansi --no-sort --reverse --tiebreak=index --preview \
+   'f() { set -- $(echo -- "$@" | grep -o "[a-f0-9]\{7\}"); [ $# -eq 0 ] || git show --color=always $1 ; }; f {}' \
+   --bind "j:down,k:up,alt-j:preview-down,alt-k:preview-up,ctrl-f:preview-page-down,ctrl-b:preview-page-up,q:abort,ctrl-m:execute:
+                (grep -o '[a-f0-9]\{7\}' | head -1 |
+                xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
+                {}
+FZF-EOF" --preview-window=right:60%
+}
+
+alias gitl="git-commit-show"
+
+# remap ls to lsd
+alias ls='lsd'
