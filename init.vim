@@ -23,6 +23,8 @@ set encoding=utf-8
 :set mouse=a
 :set clipboard+=unnamedplus
 :set expandtab
+set cursorline
+highlight clear CursorLine
 
 call plug#begin()
 
@@ -49,6 +51,8 @@ Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
 Plug 'francoiscabrol/ranger.vim'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'folke/which-key.nvim'
+Plug 'vimwiki/vimwiki'
+Plug 'dominikduda/vim_current_word'
 
 call plug#end()
 
@@ -78,10 +82,14 @@ nnoremap <silent> <Leader>fd :Dashboard<CR>
 " Open the vimrc file using SPACE: f e d
 let g:vimrc_path = expand('<sfile>')
 :nnoremap <Leader>fc :exec "e ".g:vimrc_path<cr>
+:nnoremap <silent> <Leader>fcr :source $MYVIMRC<cr>
 
 nnoremap <silent> <Leader>tn :NERDTreeToggle<CR>
 nnoremap <silent> <Leader>tt :TagbarToggle<CR>
 
+" fzf power 
+nnoremap <silent> <Leader>fzb :BLines<CR>
+nnoremap <silent> <Leader>fzl :Lines<CR>
 
 " Leader mappings
 :nnoremap <Leader><Leader> :Maps<cr>
