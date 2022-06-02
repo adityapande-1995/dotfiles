@@ -26,6 +26,14 @@ wget https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
 chmod +x nvim.appimage
 mv nvim.appimage ..
 
+# Vim plug
+sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+
+# init.vim from github
+cd ~/.config ; mkdir nvim; cd nvim
+wget https://raw.githubusercontent.com/adityapande-1995/dotfiles/master/init.vim
+
 # Installing nodejs for neovim CoC
 curl -sL https://deb.nodesource.com/setup_17.x | sudo -E bash -
 sudo apt-get install -y nodejs npm
