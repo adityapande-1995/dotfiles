@@ -158,6 +158,3 @@ FZF-EOF" --preview-window=right:60%
 }
 
 alias gitl="git-commit-show"
-
-# remap ls to lsd
-alias ls='lsd'
