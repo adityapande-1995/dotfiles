@@ -9,6 +9,9 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 # zsh-autosugestions
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
+# Starship prompt
+curl -sS https://starship.rs/install.sh | sh
+
 # Download zshrc from github
 cd ~
 rm .zshrc
