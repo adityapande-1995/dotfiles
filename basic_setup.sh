@@ -8,9 +8,14 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 
 # zsh-autosugestions
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-# Add it to zshrc extensions manually
+
+# Download zshrc from github
+cd ~
+rm .zshrc
+wget https://raw.githubusercontent.com/adityapande-1995/dotfiles/master/.zshrc
 
 # Install fonts
+cd ~/Downloads
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/DroidSansMono.zip
 unzip DroidSansMono.zip -d ~/.fonts
 fc-cache -fv
