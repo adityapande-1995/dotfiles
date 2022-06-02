@@ -1,7 +1,7 @@
 # Basic setup
 sudo apt-get update; sudo apt-get -y upgrade
 
-sudo apt install vim-gtk git curl silversearcher-ag ripgrep neofetch htop zsh ranger fzf ctags
+sudo apt install vim-gtk git curl silversearcher-ag ripgrep neofetch htop zsh ranger fzf ctags python3-pip terminator
 
 # Install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -26,14 +26,11 @@ wget https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
 chmod +x nvim.appimage
 mv nvim.appimage ..
 
-# Vim plug
-sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-
 # init.vim from github
 cd ~/.config ; mkdir nvim; cd nvim
 wget https://raw.githubusercontent.com/adityapande-1995/dotfiles/master/init.vim
 
 # Installing nodejs for neovim CoC
-curl -sL https://deb.nodesource.com/setup_17.x | sudo -E bash -
-sudo apt-get install -y nodejs npm
+sudo su; curl -sL install-node.now.sh | bash 
+sudo apt-get install -y npm
+pip3 install jedi
