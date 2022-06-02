@@ -20,7 +20,9 @@ wget https://raw.githubusercontent.com/adityapande-1995/dotfiles/master/.zshrc
 # Install fonts
 cd ~/Downloads
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/DroidSansMono.zip
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip
 unzip DroidSansMono.zip -d ~/.fonts
+unzip FiraCode.zip -d ~/.fonts
 fc-cache -fv
 sudo apt-get install fonts-powerline
 
