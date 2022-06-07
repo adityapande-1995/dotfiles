@@ -1,7 +1,7 @@
 # Basic setup
 sudo apt-get update; sudo apt-get -y upgrade
 
-sudo apt install vim-gtk git curl silversearcher-ag ripgrep neofetch htop zsh ranger fzf ctags python3-pip terminator
+sudo apt install vim-gtk xclip git curl silversearcher-ag ripgrep neofetch htop zsh ranger fzf ctags python3-pip terminator
 
 # Install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
